@@ -30,34 +30,7 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #5D5CDE 0%, #8B5CF6 100%);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .progress-bar {
-            transition: width 0.3s ease;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <!-- Header -->
@@ -65,7 +38,7 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center" aria-hidden="true">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
                     <div>
@@ -73,34 +46,34 @@
                         <p class="text-sm opacity-90">Resolução 727/2023</p>
                     </div>
                 </div>
-                <button id="menuToggle" class="md:hidden">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                <button id="menuToggle" class="md:hidden" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="navigation">
+                    <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Navigation -->
-    <nav id="navigation" class="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700 sticky top-20 z-40">
+    <nav id="navigation" class="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700 sticky top-20 z-40 md:flex"> {/* md:flex ensures it's visible on medium+ screens */}
         <div class="container mx-auto px-4">
-            <div class="flex overflow-x-auto scrollbar-hide space-x-1">
+            <div class="flex overflow-x-auto scrollbar-hide space-x-1 md:flex md:items-center"> {/* Ensure flex and alignment for desktop */}
                 <button onclick="showSection('home')" class="nav-btn active whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="home" class="w-4 h-4 mr-2"></i>Início
+                    <i data-lucide="home" class="w-4 h-4 mr-2" aria-hidden="true"></i>Início
                 </button>
                 <button onclick="showSection('about')" class="nav-btn whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="info" class="w-4 h-4 mr-2"></i>Sobre a Resolução
+                    <i data-lucide="info" class="w-4 h-4 mr-2" aria-hidden="true"></i>Sobre a Resolução
                 </button>
                 <button onclick="showSection('procedures')" class="nav-btn whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>Procedimentos
+                    <i data-lucide="file-text" class="w-4 h-4 mr-2" aria-hidden="true"></i>Procedimentos
                 </button>
                 <button onclick="showSection('checklist')" class="nav-btn whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>Checklist
+                    <i data-lucide="check-square" class="w-4 h-4 mr-2" aria-hidden="true"></i>Checklist
                 </button>
                 <button onclick="showSection('calculator')" class="nav-btn whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="calculator" class="w-4 h-4 mr-2"></i>Calculadora
+                    <i data-lucide="calculator" class="w-4 h-4 mr-2" aria-hidden="true"></i>Calculadora
                 </button>
                 <button onclick="showSection('faq')" class="nav-btn whitespace-nowrap px-4 py-3 text-sm font-medium rounded-t-lg">
-                    <i data-lucide="help-circle" class="w-4 h-4 mr-2"></i>FAQ
+                    <i data-lucide="help-circle" class="w-4 h-4 mr-2" aria-hidden="true"></i>FAQ
                 </button>
             </div>
         </div>
@@ -115,7 +88,7 @@
                     Guia Completo da Resolução 727/2023
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    Tudo que você precisa saber sobre os procedimentos para concessão, renovação e cancelamento 
+                    Tudo que você precisa saber sobre os procedimentos para concessão, renovação e cancelamento
                     do registro da Anotação de Responsabilidade Técnica (ART) pelo Serviço de Enfermagem.
                 </p>
             </div>
@@ -123,7 +96,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 <!-- Quick Access Cards -->
                 <div class="card-hover bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
-                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
                         <i data-lucide="user-check" class="w-6 h-6 text-primary"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Enfermeiro RT</h3>
@@ -134,7 +107,7 @@
                 </div>
 
                 <div class="card-hover bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
                         <i data-lucide="clipboard-list" class="w-6 h-6 text-green-600"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Documentos</h3>
@@ -145,7 +118,7 @@
                 </div>
 
                 <div class="card-hover bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
-                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
                         <i data-lucide="clock" class="w-6 h-6 text-blue-600"></i>
                     </div>
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Prazos</h3>
@@ -161,7 +134,7 @@
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Informações Importantes</h3>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="flex items-start space-x-3">
-                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1" aria-hidden="true">
                             <i data-lucide="calendar" class="w-3 h-3 text-white"></i>
                         </div>
                         <div>
@@ -170,7 +143,7 @@
                         </div>
                     </div>
                     <div class="flex items-start space-x-3">
-                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1" aria-hidden="true">
                             <i data-lucide="users" class="w-3 h-3 text-white"></i>
                         </div>
                         <div>
@@ -179,7 +152,7 @@
                         </div>
                     </div>
                     <div class="flex items-start space-x-3">
-                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1" aria-hidden="true">
                             <i data-lucide="clock" class="w-3 h-3 text-white"></i>
                         </div>
                         <div>
@@ -188,7 +161,7 @@
                         </div>
                     </div>
                     <div class="flex items-start space-x-3">
-                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1" aria-hidden="true">
                             <i data-lucide="calendar-days" class="w-3 h-3 text-white"></i>
                         </div>
                         <div>
@@ -203,27 +176,27 @@
         <!-- About Section -->
         <section id="about" class="section-content hidden">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Sobre a Resolução 727/2023</h2>
-            
+
             <!-- Definition Cards -->
             <div class="grid lg:grid-cols-2 gap-6 mb-8">
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                        <i data-lucide="bookmark" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="bookmark" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Anotação de Responsabilidade Técnica (ART)
                     </h3>
                     <p class="text-gray-600 dark:text-gray-300">
-                        Ato administrativo concedido pelo COREN que licencia o ERT para atuar na referência e relação 
+                        Ato administrativo concedido pelo COREN que licencia o ERT para atuar na referência e relação
                         entre o Serviço de Enfermagem da empresa/instituição/organização e o COREN.
                     </p>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                        <i data-lucide="user-check" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="user-check" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Enfermeiro Responsável Técnico (ERT)
                     </h3>
                     <p class="text-gray-600 dark:text-gray-300">
-                        Profissional Enfermeiro que exerce as atividades de enfermagem dispostas na Lei nº 7.498/86 
+                        Profissional Enfermeiro que exerce as atividades de enfermagem dispostas na Lei nº 7.498/86
                         e Decreto nº 94.406/87, a quem é concedida pelo COREN a ART.
                     </p>
                 </div>
@@ -234,7 +207,7 @@
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Tipos de Gestão da ART</h3>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                             <i data-lucide="heart-pulse" class="w-8 h-8 text-blue-600"></i>
                         </div>
                         <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Gestão Assistencial</h4>
@@ -243,7 +216,7 @@
                         </p>
                     </div>
                     <div class="text-center">
-                        <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                             <i data-lucide="settings" class="w-8 h-8 text-green-600"></i>
                         </div>
                         <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Gestão de Área Técnica</h4>
@@ -252,7 +225,7 @@
                         </p>
                     </div>
                     <div class="text-center">
-                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                             <i data-lucide="graduation-cap" class="w-8 h-8 text-purple-600"></i>
                         </div>
                         <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Gestão de Ensino/Formação</h4>
@@ -292,34 +265,34 @@
         <!-- Procedures Section -->
         <section id="procedures" class="section-content hidden">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Procedimentos e Documentos</h2>
-            
+
             <!-- Process Flow -->
             <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700 mb-8">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Fluxo do Processo</h3>
                 <div class="grid md:grid-cols-4 gap-4">
                     <div class="text-center">
-                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                             <span class="text-white font-bold">1</span>
                         </div>
                         <h4 class="font-medium text-gray-900 dark:text-white mb-1">Preparação</h4>
                         <p class="text-sm text-gray-600 dark:text-gray-300">Reunir documentos necessários</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                             <span class="text-white font-bold">2</span>
                         </div>
                         <h4 class="font-medium text-gray-900 dark:text-white mb-1">Solicitação</h4>
                         <p class="text-sm text-gray-600 dark:text-gray-300">Preencher formulário no COREN</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                             <span class="text-white font-bold">3</span>
                         </div>
                         <h4 class="font-medium text-gray-900 dark:text-white mb-1">Análise</h4>
                         <p class="text-sm text-gray-600 dark:text-gray-300">COREN analisa documentação</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3" aria-hidden="true">
                             <i data-lucide="check" class="w-6 h-6 text-white"></i>
                         </div>
                         <h4 class="font-medium text-gray-900 dark:text-white mb-1">Emissão</h4>
@@ -332,32 +305,32 @@
             <div class="grid lg:grid-cols-2 gap-6">
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                        <i data-lucide="building" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="building" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Dados da Empresa/Instituição
                     </h3>
                     <ul class="space-y-3">
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Razão social e nome fantasia</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">CNES (se houver)</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">CNPJ</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Natureza jurídica</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Horário de funcionamento</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Endereço completo e contatos</span>
                         </li>
                     </ul>
@@ -365,32 +338,32 @@
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                        <i data-lucide="user" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="user" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Dados do ERT
                     </h3>
                     <ul class="space-y-3">
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Nome completo</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Número de inscrição no COREN</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Endereço completo e contatos</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Local/setor onde exerce função de ERT</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Horário e carga horária semanal</span>
                         </li>
                         <li class="flex items-start space-x-3">
-                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                            <i data-lucide="check" class="w-5 h-5 text-green-600 mt-0.5" aria-hidden="true"></i>
                             <span class="text-gray-700 dark:text-gray-300">Outros vínculos profissionais</span>
                         </li>
                     </ul>
@@ -400,24 +373,24 @@
             <!-- Additional Requirements -->
             <div class="mt-8 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-6">
                 <h3 class="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-4 flex items-center">
-                    <i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i>
+                    <i data-lucide="alert-triangle" class="w-5 h-5 mr-2" aria-hidden="true"></i>
                     Requisitos Importantes
                 </h3>
                 <div class="grid md:grid-cols-2 gap-4 text-sm">
                     <div class="flex items-start space-x-2">
-                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1" aria-hidden="true"></i>
                         <span class="text-yellow-800 dark:text-yellow-200">Quitação das anuidades do COREN</span>
                     </div>
                     <div class="flex items-start space-x-2">
-                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1" aria-hidden="true"></i>
                         <span class="text-yellow-800 dark:text-yellow-200">CIP vigente</span>
                     </div>
                     <div class="flex items-start space-x-2">
-                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1" aria-hidden="true"></i>
                         <span class="text-yellow-800 dark:text-yellow-200">Antecedentes éticos adequados</span>
                     </div>
                     <div class="flex items-start space-x-2">
-                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1"></i>
+                        <i data-lucide="circle-check" class="w-4 h-4 text-yellow-600 mt-1" aria-hidden="true"></i>
                         <span class="text-yellow-800 dark:text-yellow-200">Não coincidência de horários</span>
                     </div>
                 </div>
@@ -427,14 +400,19 @@
         <!-- Checklist Section -->
         <section id="checklist" class="section-content hidden">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Checklist para Solicitação da ART</h2>
-            
+
             <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Progresso da Documentação</h3>
-                        <span id="progress-text" class="text-sm font-medium text-gray-600 dark:text-gray-400">0 de 15 itens</span>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="checklist-heading">Progresso da Documentação</h3>
+                        <span id="progress-text" class="text-sm font-medium text-gray-600 dark:text-gray-400" aria-live="polite">0 de 15 itens</span>
                     </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3"
+                         role="progressbar"
+                         aria-labelledby="checklist-heading"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         aria-valuenow="0">
                         <div id="progress-bar" class="progress-bar bg-gradient-to-r from-primary to-primary-light h-3 rounded-full" style="width: 0%"></div>
                     </div>
                 </div>
@@ -517,11 +495,11 @@
 
                 <div class="mt-8 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
                     <div class="flex items-center space-x-2">
-                        <i data-lucide="lightbulb" class="w-5 h-5 text-green-600"></i>
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-green-600" aria-hidden="true"></i>
                         <h4 class="font-semibold text-green-800 dark:text-green-200">Dica Importante</h4>
                     </div>
                     <p class="text-green-700 dark:text-green-300 mt-2 text-sm">
-                        Certifique-se de que todos os documentos estão atualizados e devidamente assinados antes de enviar a solicitação. 
+                        Certifique-se de que todos os documentos estão atualizados e devidamente assinados antes de enviar a solicitação.
                         Documentos incompletos podem atrasar a análise e emissão da CRT.
                     </p>
                 </div>
@@ -531,28 +509,28 @@
         <!-- Calculator Section -->
         <section id="calculator" class="section-content hidden">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Calculadora de Prazos</h2>
-            
+
             <div class="grid lg:grid-cols-2 gap-8">
                 <!-- Renewal Calculator -->
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                        <i data-lucide="calendar-days" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="calendar-days" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Calculadora de Renovação
                     </h3>
-                    
+
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label for="expirationDate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Data de vencimento da CRT atual
                             </label>
                             <input type="date" id="expirationDate" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white">
                         </div>
-                        
+
                         <button onclick="calculateRenewal()" class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 px-4 rounded-lg transition-colors">
                             Calcular Prazos
                         </button>
-                        
-                        <div id="renewalResults" class="hidden space-y-3 mt-4">
+
+                        <div id="renewalResults" class="hidden space-y-3 mt-4" aria-live="polite">
                             <div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                                 <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">Período para Renovação</h4>
                                 <p class="text-sm text-blue-700 dark:text-blue-300">
@@ -560,7 +538,7 @@
                                     <strong>Limite:</strong> <span id="renewalEnd"></span>
                                 </p>
                             </div>
-                            
+
                             <div id="renewalStatus" class="p-4 rounded-lg"></div>
                         </div>
                     </div>
@@ -569,30 +547,30 @@
                 <!-- Working Hours Calculator -->
                 <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border dark:border-gray-700">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center">
-                        <i data-lucide="clock" class="w-5 h-5 mr-2 text-primary"></i>
+                        <i data-lucide="clock" class="w-5 h-5 mr-2 text-primary" aria-hidden="true"></i>
                         Verificador de Carga Horária
                     </h3>
-                    
+
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label for="weeklyHours" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Carga horária semanal como ERT
                             </label>
                             <input type="number" id="weeklyHours" min="1" max="60" placeholder="Ex: 40" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white">
                         </div>
-                        
+
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            <label for="serviceHours" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Horário de funcionamento do serviço (horas/semana)
                             </label>
                             <input type="number" id="serviceHours" min="1" max="168" placeholder="Ex: 168 (24h x 7 dias)" class="w-full px-3 py-2 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-700 dark:text-white">
                         </div>
-                        
+
                         <button onclick="validateHours()" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg transition-colors">
                             Verificar Adequação
                         </button>
-                        
-                        <div id="hoursResults" class="hidden mt-4"></div>
+
+                        <div id="hoursResults" class="hidden mt-4" aria-live="polite"></div>
                     </div>
                 </div>
             </div>
@@ -624,87 +602,87 @@
         <!-- FAQ Section -->
         <section id="faq" class="section-content hidden">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Perguntas Frequentes</h2>
-            
+
             <div class="space-y-4">
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq1')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq1-button" onclick="toggleFAQ('faq1')" aria-expanded="false" aria-controls="faq1" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">Posso ter mais de uma ART?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq1"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq1"></i>
                     </button>
-                    <div id="faq1" class="hidden px-6 pb-4">
+                    <div id="faq1" class="hidden px-6 pb-4" role="region" aria-labelledby="faq1-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            Sim, é possível ter até 2 (duas) concessões de ART por enfermeiro, desde que não haja coincidência 
-                            de horário de suas atividades como ERT e outras atribuições, mediante apresentação de Declaração 
+                            Sim, é possível ter até 2 (duas) concessões de ART por enfermeiro, desde que não haja coincidência
+                            de horário de suas atividades como ERT e outras atribuições, mediante apresentação de Declaração
                             de Não Coincidência de Horário.
                         </p>
                     </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq2')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq2-button" onclick="toggleFAQ('faq2')" aria-expanded="false" aria-controls="faq2" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">Qual a carga horária mínima para ser ERT?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq2"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq2"></i>
                     </button>
-                    <div id="faq2" class="hidden px-6 pb-4">
+                    <div id="faq2" class="hidden px-6 pb-4" role="region" aria-labelledby="faq2-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            A jornada de trabalho para ART não poderá ser inferior a 20 (vinte) horas semanais na 
-                            empresa/instituição/organização como ERT, salvo quando o horário de funcionamento do serviço 
+                            A jornada de trabalho para ART não poderá ser inferior a 20 (vinte) horas semanais na
+                            empresa/instituição/organização como ERT, salvo quando o horário de funcionamento do serviço
                             de Enfermagem for inferior a 20 horas semanais.
                         </p>
                     </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq3')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq3-button" onclick="toggleFAQ('faq3')" aria-expanded="false" aria-controls="faq3" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">Como renovar a ART?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq3"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq3"></i>
                     </button>
-                    <div id="faq3" class="hidden px-6 pb-4">
+                    <div id="faq3" class="hidden px-6 pb-4" role="region" aria-labelledby="faq3-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            A renovação deve ser solicitada no prazo de 30 dias antecedentes até, impreterivelmente, 
-                            30 dias posteriores à vigência da CRT. Para renovação, é necessário entregar o Planejamento 
+                            A renovação deve ser solicitada no prazo de 30 dias antecedentes até, impreterivelmente,
+                            30 dias posteriores à vigência da CRT. Para renovação, é necessário entregar o Planejamento
                             e a Programação de Enfermagem com o quantitativo necessário de pessoal.
                         </p>
                     </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq4')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq4-button" onclick="toggleFAQ('faq4')" aria-expanded="false" aria-controls="faq4" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">O que acontece se eu me afastar temporariamente?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq4"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq4"></i>
                     </button>
-                    <div id="faq4" class="hidden px-6 pb-4">
+                    <div id="faq4" class="hidden px-6 pb-4" role="region" aria-labelledby="faq4-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            Para afastamentos de 31 a 120 dias, deve ser designado um ERT interino. Para afastamentos 
-                            superiores a 121 dias, é necessário cancelar a ART. Em caso de licença maternidade, 
+                            Para afastamentos de 31 a 120 dias, deve ser designado um ERT interino. Para afastamentos
+                            superiores a 121 dias, é necessário cancelar a ART. Em caso de licença maternidade,
                             excepcionalmente pode haver substituição por ERT interino durante todo o período.
                         </p>
                     </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq5')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq5-button" onclick="toggleFAQ('faq5')" aria-expanded="false" aria-controls="faq5" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">Quais são as principais atribuições do ERT?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq5"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq5"></i>
                     </button>
-                    <div id="faq5" class="hidden px-6 pb-4">
+                    <div id="faq5" class="hidden px-6 pb-4" role="region" aria-labelledby="faq5-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            As principais atribuições incluem: fazer o planejamento de enfermagem, organizar e coordenar 
-                            os serviços, manter dados atualizados dos profissionais, verificar inscrições e CIPs, 
+                            As principais atribuições incluem: fazer o planejamento de enfermagem, organizar e coordenar
+                            os serviços, manter dados atualizados dos profissionais, verificar inscrições e CIPs,
                             implementar a SAE, elaborar normas e rotinas, e colaborar com a fiscalização do COREN.
                         </p>
                     </div>
                 </div>
 
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 overflow-hidden">
-                    <button onclick="toggleFAQ('faq6')" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <button id="faq6-button" onclick="toggleFAQ('faq6')" aria-expanded="false" aria-controls="faq6" class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                         <span class="font-semibold text-gray-900 dark:text-white">Há isenção de taxa para algum tipo de instituição?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq6"></i>
+                        <i data-lucide="chevron-down" aria-hidden="true" class="w-5 h-5 text-gray-500 transform transition-transform" id="icon-faq6"></i>
                     </button>
-                    <div id="faq6" class="hidden px-6 pb-4">
+                    <div id="faq6" class="hidden px-6 pb-4" role="region" aria-labelledby="faq6-button">
                         <p class="text-gray-600 dark:text-gray-300">
-                            Sim, as empresas/instituições/organizações públicas, beneficentes e filantrópicas podem 
-                            requerer ao COREN a isenção do recolhimento das taxas de ART, mediante a comprovação 
+                            Sim, as empresas/instituições/organizações públicas, beneficentes e filantrópicas podem
+                            requerer ao COREN a isenção do recolhimento das taxas de ART, mediante a comprovação
                             de sua natureza jurídica.
                         </p>
                     </div>
@@ -719,15 +697,15 @@
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <div class="flex items-center space-x-2">
-                        <i data-lucide="phone" class="w-5 h-5 text-primary"></i>
+                        <i data-lucide="phone" class="w-5 h-5 text-primary" aria-hidden="true"></i>
                         <span class="text-gray-700 dark:text-gray-300">(62) 3216-3900</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+                        <i data-lucide="mail" class="w-5 h-5 text-primary" aria-hidden="true"></i>
                         <span class="text-gray-700 dark:text-gray-300">atendimento@corengo.gov.br</span>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <i data-lucide="globe" class="w-5 h-5 text-primary"></i>
+                        <i data-lucide="globe" class="w-5 h-5 text-primary" aria-hidden="true"></i>
                         <span class="text-gray-700 dark:text-gray-300">www.corengo.gov.br</span>
                     </div>
                 </div>
@@ -740,7 +718,7 @@
         <div class="container mx-auto px-4">
             <div class="text-center">
                 <div class="flex items-center justify-center space-x-2 mb-4">
-                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center" aria-hidden="true">
                         <i data-lucide="shield-check" class="w-4 h-4"></i>
                     </div>
                     <span class="text-xl font-bold">COREN-GO</span>
@@ -749,201 +727,13 @@
                     Conselho Regional de Enfermagem de Goiás
                 </p>
                 <p class="text-gray-500 text-sm">
-                    © 2023 COREN-GO. Resolução COFEN nº 727/2023. 
+                    © 2023 COREN-GO. Resolução COFEN nº 727/2023.
                     Aplicativo educativo para orientação sobre procedimentos de ART.
                 </p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Dark mode detection
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Navigation
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section-content').forEach(section => {
-                section.classList.add('hidden');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.remove('hidden');
-            
-            // Update active navigation
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active', 'bg-primary', 'text-white');
-                btn.classList.add('text-gray-700', 'dark:text-gray-300', 'hover:text-primary');
-            });
-            
-            event.target.classList.add('active', 'bg-primary', 'text-white');
-            event.target.classList.remove('text-gray-700', 'dark:text-gray-300', 'hover:text-primary');
-        }
-
-        // Mobile menu toggle
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            const nav = document.getElementById('navigation');
-            nav.classList.toggle('hidden');
-        });
-
-        // Checklist functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
-            
-            function updateProgress() {
-                const total = checkboxes.length;
-                const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
-                const percentage = (checked / total) * 100;
-                
-                progressBar.style.width = percentage + '%';
-                progressText.textContent = `${checked} de ${total} itens`;
-                
-                // Update color based on progress
-                if (percentage === 100) {
-                    progressBar.className = 'progress-bar bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full';
-                } else if (percentage >= 75) {
-                    progressBar.className = 'progress-bar bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full';
-                } else {
-                    progressBar.className = 'progress-bar bg-gradient-to-r from-primary to-primary-light h-3 rounded-full';
-                }
-            }
-            
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateProgress);
-            });
-        });
-
-        // Calculator functions
-        function calculateRenewal() {
-            const expirationDate = document.getElementById('expirationDate').value;
-            const resultsDiv = document.getElementById('renewalResults');
-            
-            if (!expirationDate) {
-                alert('Por favor, selecione a data de vencimento da CRT.');
-                return;
-            }
-            
-            const expiry = new Date(expirationDate);
-            const renewalStart = new Date(expiry);
-            renewalStart.setDate(expiry.getDate() - 30);
-            
-            const renewalEnd = new Date(expiry);
-            renewalEnd.setDate(expiry.getDate() + 30);
-            
-            const today = new Date();
-            const currentStatus = document.getElementById('renewalStatus');
-            
-            document.getElementById('renewalStart').textContent = renewalStart.toLocaleDateString('pt-BR');
-            document.getElementById('renewalEnd').textContent = renewalEnd.toLocaleDateString('pt-BR');
-            
-            // Determine status
-            if (today < renewalStart) {
-                currentStatus.className = 'p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg';
-                currentStatus.innerHTML = '<strong>Status:</strong> Ainda não é possível renovar. Aguarde o período adequado.';
-            } else if (today >= renewalStart && today <= expiry) {
-                currentStatus.className = 'p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg';
-                currentStatus.innerHTML = '<strong>Status:</strong> <span class="text-green-600">Período ideal para renovação!</span>';
-            } else if (today > expiry && today <= renewalEnd) {
-                currentStatus.className = 'p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg';
-                currentStatus.innerHTML = '<strong>Status:</strong> <span class="text-yellow-600">CRT vencida! Renove urgentemente.</span>';
-            } else {
-                currentStatus.className = 'p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg';
-                currentStatus.innerHTML = '<strong>Status:</strong> <span class="text-red-600">Prazo para renovação expirado. Será necessário novo processo.</span>';
-            }
-            
-            resultsDiv.classList.remove('hidden');
-        }
-        
-        function validateHours() {
-            const weeklyHours = parseInt(document.getElementById('weeklyHours').value);
-            const serviceHours = parseInt(document.getElementById('serviceHours').value);
-            const resultsDiv = document.getElementById('hoursResults');
-            
-            if (!weeklyHours || !serviceHours) {
-                alert('Por favor, preencha ambos os campos.');
-                return;
-            }
-            
-            let resultHTML = '';
-            let resultClass = '';
-            
-            if (serviceHours < 20 && weeklyHours === serviceHours) {
-                resultClass = 'p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg';
-                resultHTML = `
-                    <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
-                        <strong class="text-green-800 dark:text-green-200">Carga horária adequada!</strong>
-                    </div>
-                    <p class="text-green-700 dark:text-green-300 text-sm">
-                        Como o serviço funciona menos de 20h semanais, a carga horária de ${weeklyHours}h está adequada.
-                    </p>
-                `;
-            } else if (weeklyHours >= 20) {
-                resultClass = 'p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg';
-                resultHTML = `
-                    <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
-                        <strong class="text-green-800 dark:text-green-200">Carga horária adequada!</strong>
-                    </div>
-                    <p class="text-green-700 dark:text-green-300 text-sm">
-                        A carga horária de ${weeklyHours}h atende ao requisito mínimo de 20h semanais.
-                    </p>
-                `;
-            } else {
-                resultClass = 'p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg';
-                resultHTML = `
-                    <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="x-circle" class="w-5 h-5 text-red-600"></i>
-                        <strong class="text-red-800 dark:text-red-200">Carga horária inadequada!</strong>
-                    </div>
-                    <p class="text-red-700 dark:text-red-300 text-sm">
-                        A carga horária de ${weeklyHours}h é inferior ao mínimo de 20h semanais exigido.
-                    </p>
-                `;
-            }
-            
-            resultsDiv.className = resultClass;
-            resultsDiv.innerHTML = resultHTML;
-            resultsDiv.classList.remove('hidden');
-            
-            // Re-initialize icons
-            lucide.createIcons();
-        }
-
-        // FAQ functionality
-        function toggleFAQ(faqId) {
-            const faqContent = document.getElementById(faqId);
-            const icon = document.getElementById('icon-' + faqId);
-            
-            if (faqContent.classList.contains('hidden')) {
-                faqContent.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                faqContent.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        // Initialize active navigation state
-        document.addEventListener('DOMContentLoaded', function() {
-            const firstNavBtn = document.querySelector('.nav-btn');
-            firstNavBtn.classList.add('active', 'bg-primary', 'text-white');
-            firstNavBtn.classList.remove('text-gray-700', 'dark:text-gray-300', 'hover:text-primary');
-        });
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
