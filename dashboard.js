@@ -97,6 +97,40 @@ function initCharts() {
     });
 }
 
+// Helper to normalize data structure
+function normalizeData(rawData) {
+    if (!rawData || rawData.length === 0) return [];
+
+    // Helper to find value by possible keys
+    const findValue = (row, candidates) => {
+        const keys = Object.keys(row);
+        for (const candidate of candidates) {
+            // Exact match
+            if (row[candidate] !== undefined) return row[candidate];
+
+            // Case insensitive match
+            const key = keys.find(k => k.trim().toUpperCase() === candidate.toUpperCase());
+            if (key) return row[key];
+
+            // Fuzzy/Partial match for complex headers
+            const fuzzyKey = keys.find(k => k.toUpperCase().includes(candidate.toUpperCase()));
+            if (fuzzyKey) return row[fuzzyKey];
+        }
+        return '';
+    };
+
+    return rawData.map(row => {
+        return {
+            initiative: findValue(row, ['I.E(INICIATIVA ESTRATEGICA)', 'INICIATIVA', 'I.E.', 'NOME', 'DESCRIÇÃO', 'DESCRICAO']),
+            status: findValue(row, ['STATUS', 'SITUAÇÃO', 'ESTADO', 'SITUACAO']),
+            priority: findValue(row, ['Prioridade', 'PRIORIDADE', 'NÍVEL', 'NIVEL']),
+            managerProg: findValue(row, ['GERENTE DO PROGRAMA', 'GERENTE DE PROGRAMA', 'PROGRAMA']),
+            managerProj: findValue(row, ['GERENTE DO PROJETO', 'GERENTE DE PROJETO', 'PROJETO'])
+        };
+    }).filter(item => item.initiative || item.status); // Filter out empty rows
+}
+
+
 // File Upload Handler
 if (fileUpload) {
     fileUpload.addEventListener('change', (e) => {
@@ -105,17 +139,35 @@ if (fileUpload) {
 
         const reader = new FileReader();
         reader.onload = (e) => {
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: 'array' });
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
 
-            // Assume first sheet
-            const firstSheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[firstSheetName];
+                // Assume first sheet
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
 
-            // Convert to JSON
-            const json = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+                // Convert to JSON
+                const json = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
 
-            processData(json);
+                if (json.length === 0) {
+                    alert('O arquivo parece estar vazio ou não pôde ser lido corretamente.');
+                    return;
+                }
+
+                const normalized = normalizeData(json);
+
+                if (normalized.length === 0) {
+                    alert('Não foi possível identificar colunas compatíveis. Verifique se o arquivo possui cabeçalhos como "Iniciativa", "Status", "Prioridade", etc.');
+                    console.log('Available columns:', Object.keys(json[0]));
+                    return;
+                }
+
+                processData(normalized);
+            } catch (error) {
+                console.error('Erro ao processar arquivo:', error);
+                alert('Ocorreu um erro ao processar o arquivo. Verifique o console para mais detalhes.');
+            }
         };
         reader.readAsArrayBuffer(file);
     });
@@ -142,7 +194,7 @@ function updateKPIs() {
 
     filteredData.forEach(row => {
         // Normalize status
-        const status = (row['STATUS'] || '').toString().trim().toUpperCase();
+        const status = (row.status || '').toString().trim().toUpperCase();
         if (status === 'FEITO' || status === 'CONCLUÍDO' || status === 'CONCLUIDO') {
             completed++;
         } else if (status === 'EM ANDAMENTO' || status.includes('ANDAMENTO')) {
@@ -166,9 +218,10 @@ function updateCharts() {
     // Count Statuses
     const statusCounts = {};
     filteredData.forEach(row => {
-        let status = (row['STATUS'] || 'Não Definido').toString().trim().toUpperCase();
+        let status = (row.status || 'Não Definido').toString().trim().toUpperCase();
         // Standardize common statuses
         if (status === 'FEITO') status = 'CONCLUÍDO';
+        if (status === '') status = 'NÃO DEFINIDO';
 
         statusCounts[status] = (statusCounts[status] || 0) + 1;
     });
@@ -180,7 +233,8 @@ function updateCharts() {
     // Count Priorities
     const priorityCounts = {};
     filteredData.forEach(row => {
-        const priority = (row['Prioridade'] || 'Não Definido').toString().trim().toUpperCase();
+        let priority = (row.priority || 'Não Definido').toString().trim().toUpperCase();
+        if (priority === '') priority = 'NÃO DEFINIDO';
         priorityCounts[priority] = (priorityCounts[priority] || 0) + 1;
     });
 
@@ -210,7 +264,8 @@ function updateCharts() {
     // Count Managers
     const managerCounts = {};
     filteredData.forEach(row => {
-        const manager = (row['GERENTE DO PROGRAMA'] || 'Não Definido').toString().trim().toUpperCase();
+        let manager = (row.managerProg || 'Não Definido').toString().trim().toUpperCase();
+        if (manager === '') manager = 'NÃO DEFINIDO';
         managerCounts[manager] = (managerCounts[manager] || 0) + 1;
     });
 
@@ -239,12 +294,12 @@ function updateTable() {
         pageData.forEach(row => {
             const tr = document.createElement('tr');
 
-            // Safe access
-            const managerProg = row['GERENTE DO PROGRAMA'] || '';
-            const managerProj = row['GERENTE DO PROJETO'] || '';
-            const initiative = row['I.E(INICIATIVA ESTRATEGICA)'] || '';
-            const status = row['STATUS'] || '';
-            const priority = row['Prioridade'] || '';
+            // Safe access (already normalized)
+            const managerProg = row.managerProg || '';
+            const managerProj = row.managerProj || '';
+            const initiative = row.initiative || '';
+            const status = row.status || '';
+            const priority = row.priority || '';
 
             // Status Badge Color
             let statusColor = 'bg-gray-100 text-gray-800';
